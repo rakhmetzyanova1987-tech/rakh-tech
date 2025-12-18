@@ -346,13 +346,12 @@
 
         async function generateDesign() {
             if (!selectedFile) {
-                alert('Пожалуйста, выберите фото');
-                return;
+                // For demo: create test image when no file selected
+                document.getElementById('resultImage').src = createDemoImage();
+                document.getElementById('resultContainer').style.display = 'block';  
             }
 
-            const button = event.target;
-            button.disabled = true;
-            button.textContent = '⏳ ОБРАБОТКА...';
+                        button.textContent = '⏳ ОБРАБОТКА...';
 
             try {
                 const formData = new FormData();
@@ -397,6 +396,37 @@
             document.getElementById('resultContainer').style.display = 'none';
             selectedFile = null;
             document.getElementById('photoInput').value = '';
+        }
+            
+        // Mock demo image generation for testing
+        function createDemoImage() {
+            const canvas = document.createElement('canvas');
+            canvas.width = 800;
+            canvas.height = 600;
+            const ctx = canvas.getContext('2d');
+            
+            // Create gradient background
+            const gradient = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
+            gradient.addColorStop(0, '#1a1a2e');
+            gradient.addColorStop(1, '#16213e');
+            ctx.fillStyle = gradient;
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            
+            // Add accent color rectangles
+            ctx.fillStyle = 'rgba(0, 212, 255, 0.2)';
+            ctx.fillRect(50, 50, 200, 200);
+            ctx.fillRect(550, 350, 200, 200);
+            
+            // Add text
+            ctx.fillStyle = '#00d4ff';
+            ctx.font = 'bold 24px Arial';
+            ctx.textAlign = 'center';
+            ctx.fillText('Генерированные данные', canvas.width / 2, 100);
+            ctx.font = '16px Arial';
+            ctx.fillStyle = '#b3b3b3';
+            ctx.fillText('HI-TECH Interior Design - Interior AI', canvas.width / 2, canvas.height - 50);
+            
+            return canvas.toDataURL();
         }
     </script>
 </body>
