@@ -367,3 +367,37 @@
                     headers: {
                         'Authorization': 'Bearer YOUR_INTERIOR_AI_API_KEY',
                     },
+
+                                    body: formData,
+            });
+
+            const data = await response.json();
+            document.getElementById('resultImage').src = data.image_url;
+            document.getElementById('resultContainer').style.display = 'block';
+            freeGenerations--;
+            document.getElementById('generationCount').textContent = freeGenerations + ' бесплатные';
+        } catch (error) {
+            console.error('Ошибка:', error);
+            alert('Произошла ошибка при генерации');
+        } finally {
+            button.disabled = false;
+            button.textContent = '⚡ ГЕНЕРИРОВАТЬ ДИЗАЙН';
+        }
+        }
+
+        function downloadResult() {
+            const image = document.getElementById('resultImage');
+            const link = document.createElement('a');
+            link.href = image.src;
+            link.download = 'interior-design.png';
+            link.click();
+        }
+
+        function resetDesign() {
+            document.getElementById('resultContainer').style.display = 'none';
+            selectedFile = null;
+            document.getElementById('photoInput').value = '';
+        }
+    </script>
+</body>
+</html>
