@@ -157,5 +157,49 @@
     <section class="hero"><div><h1>The Design of your dreams</h1><p class="hero-subtitle">Загрузите фото своей комнаты и получите несколько вариантов интерьера в нужном стиле за 1 минуту — вместе с базовым планом расстановки инженерных коммуникаций.</p><p class="hero-subtitle">Сервис создан для тех, кто хочет быстро протестировать идеи перед ремонтом или продажей квартиры, а также для дизайнеров и риэлторов, которым нужны быстрые визуализации.</p><div class="hero-badges"><span class="badge">Минимализм и тёплые оттенки</span><span class="badge">3 бесплатные генерации</span><span class="badge">Без водяных знаков</span></div><button class="primary-btn" onclick="openStyleModal()">Начать с бесплатной генерации</button><p class="hero-note">Выберите стиль, загрузите фото и получите дизайн за минуту.</p></div>
       <div class="hero-upload" id="upload"><h3 style="font-size:1rem; margin-bottom:10px;">Загрузка фото комнаты</h3><div class="upload-zone" onclick="document.getElementById('file-input').click()"><p><strong>Перетащите файл</strong> или нажмите, чтобы выбрать фото квартиры (JPG, PNG, до 10 МБ)</p><input type="file" id="file-input" accept="image/*" /></div><div class="preview" id="preview"><p style="font-size:0.8rem; margin-bottom:6px;">Предпросмотр исходного фото:</p><img id="preview-img" src="" alt="Предпросмотр" /></div><p style="font-size:0.85rem; color:#666; margin-top:10px;">После загрузки изображение формируется в ИИ-сервисе: создаётся новый дизайн и схема расстановки основных инженерных точек (розетки, освещение, сантехника).</p></div>
     </section>
+
+      <script>
+            function openStyleModal() {
+              document.getElementById('styleModal').style.display = 'block';
+            }
+
+            document.getElementById('file-input')?.addEventListener('change', function(e) {
+                    const file = e.target.files[0];
+                    if (file) {
+                              const reader = new FileReader();
+                              reader.onload = function(event) {
+                                          document.getElementById('preview-img').src = event.target.result;
+                                          document.getElementById('preview').style.display = 'block';
+                                        };
+                              reader.readAsDataURL(file);
+                            }
+                          });
+
+            function closeModal(modalId) {
+                    document.getElementById(modalId).style.display = 'none';
+                  }
+
+            function generateDesign() {
+                    alert('Генерация началась! Проверьте консоль браузера.');
+                    closeModal('styleModal');
+                  }
+          </script>
       </body>
     </html>
+
+
+        <div id="styleModal" class="modal">
+                <div class="modal-content">
+                          <h2 class="modal-title">Выберите стиль интерьера</h2>
+                                  <div class="modal-styles">
+                                              <button class="style-btn" onclick="selectStyle('minimalism')">Minimalism</button>
+                                                        <button class="style-btn" onclick="selectStyle('luxury')">Luxury</button>
+                                                                  <button class="style-btn" onclick="selectStyle('modern')">Modern</button>
+                                                                            <button class="style-btn" onclick="selectStyle('classic')">Classic</button>
+                                                                                    </div>
+                                                                                            <div class="modal-buttons">
+                                                                                                        <button class="cancel" onclick="closeModal('styleModal')">Отмена</button>
+                                                                                                                  <button class="generate" onclick="generateDesign()">Генерировать</button>
+                                                                                                                          </div>
+                                                                                                                                </div>
+                                                                                                                                    </div>
