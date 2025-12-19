@@ -179,6 +179,14 @@
                     document.getElementById(modalId).style.display = 'none';
                   }
 
+            function selectStyle(styleName) {
+                    document.querySelectorAll('.style-btn').forEach(btn => {
+                              btn.classList.remove('selected');
+                            });
+                    event.target.classList.add('selected');
+                    localStorage.setItem('selectedStyle', styleName);
+                  }
+
             function generateDesign() {
                     alert('Генерация началась! Проверьте консоль браузера.');
                     closeModal('styleModal');
