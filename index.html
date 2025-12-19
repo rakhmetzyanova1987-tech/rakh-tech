@@ -104,289 +104,56 @@
     .upload-zone input { display: none; }
     .preview { margin-top: 10px; display: none; }
     .preview img { max-width: 100%; border-radius: 12px; display: block; }
-    .section {
-      max-width: 1120px;
-      margin: 0 auto 60px;
-      padding: 0 20px;
-    }
+    .section { max-width: 1120px; margin: 0 auto 60px; padding: 0 20px; }
     .section h2 { font-size: 1.6rem; margin-bottom: 16px; }
     .section p { font-size: 0.95rem; color: #555; margin-bottom: 14px; line-height: 1.5; }
     .steps, .benefits, .tariff-grid, .gallery-grid, .market-grid { display: grid; gap: 14px; }
     .steps { grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); }
-    .step, .benefit-card, .tariff, .gallery-card, .market-card {
-      background: #fff;
-      border-radius: 14px;
-      padding: 14px 16px;
-      border: 1px solid #eee;
-      font-size: 0.9rem;
-    }
+    .step, .benefit-card, .tariff, .gallery-card, .market-card { background: #fff; border-radius: 14px; padding: 14px 16px; border: 1px solid #eee; font-size: 0.9rem; }
     .step-title { font-weight: 600; margin-bottom: 4px; }
     .tariff-grid { grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
     .tariff-title { font-weight: 600; margin-bottom: 6px; }
     .tariff-price { font-size: 1.2rem; margin-bottom: 10px; }
     .tariff ul { list-style: none; padding-left: 0; }
     .tariff ul li { margin-bottom: 6px; }
-    .label {
-      display: inline-block;
-      font-size: 0.7rem;
-      padding: 2px 8px;
-      border-radius: 999px;
-      background: #f1f1f1;
-      margin-left: 6px;
-    }
+    .label { display: inline-block; font-size: 0.7rem; padding: 2px 8px; border-radius: 999px; background: #f1f1f1; margin-left: 6px; }
     .gallery-grid { grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
-    .gallery-images {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 6px;
-      margin-bottom: 8px;
-    }
-    .gallery-images img {
-      width: 100%;
-      border-radius: 10px;
-      display: block;
-    }
+    .gallery-images { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; margin-bottom: 8px; }
+    .gallery-images img { width: 100%; border-radius: 10px; display: block; }
     .market-grid { grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
     .market-card ul { list-style: none; padding-left: 0; }
     .market-card li { margin-bottom: 6px; }
-    .market-card a {
-      color: #1a73e8;
-      text-decoration: none;
-      font-size: 0.9rem;
-    }
+    .market-card a { color: #1a73e8; text-decoration: none; font-size: 0.9rem; }
     .market-card a:hover { text-decoration: underline; }
-    footer {
-      border-top: 1px solid #e5e5e5;
-      padding: 20px;
-      font-size: 0.85rem;
-      color: #666;
-      max-width: 1120px;
-      margin: 0 auto 30px;
-    }
+    footer { border-top: 1px solid #e5e5e5; padding: 20px; font-size: 0.85rem; color: #666; max-width: 1120px; margin: 0 auto 30px; }
     footer a { color: #1a73e8; text-decoration: none; }
     footer a:hover { text-decoration: underline; }
-    @media (max-width: 800px) {
-      .hero { grid-template-columns: minmax(0, 1fr); }
-      header { flex-direction: column; align-items: flex-start; gap: 10px; }
-      nav a { margin-left: 0; margin-right: 14px; font-size: 0.9rem; }
-    }
+    .modal { display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.5); }
+    .modal-content { background-color: #fff; margin: 10% auto; padding: 30px; border-radius: 12px; width: 80%; max-width: 500px; }
+    .modal-title { font-size: 1.5rem; margin-bottom: 16px; font-weight: 600; }
+    .modal-styles { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin-bottom: 20px; }
+    .style-btn { padding: 10px 15px; border: 2px solid #ddd; border-radius: 8px; background: #fff; cursor: pointer; font-size: 0.95rem; transition: all 0.3s; }
+    .style-btn:hover { border-color: #111; }
+    .style-btn.selected { background: #111; color: #fff; border-color: #111; }
+    .modal-buttons { display: flex; gap: 10px; }
+    .modal-buttons button { flex: 1; padding: 10px; border: none; border-radius: 8px; cursor: pointer; font-size: 0.95rem; }
+    .modal-buttons .cancel { background: #f0f0f0; color: #111; }
+    .modal-buttons .generate { background: #111; color: #fff; }
+    .modal-buttons .cancel:hover { background: #e0e0e0; }
+    .modal-buttons .generate:hover { background: #000; }
+    .paywall-modal { display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.5); }
+    .paywall-content { background-color: #fff; margin: 15% auto; padding: 30px; border-radius: 12px; width: 80%; max-width: 400px; text-align: center; }
+    .paywall-content h2 { margin-bottom: 16px; }
+    .paywall-content p { margin-bottom: 20px; color: #666; }
+    .paywall-content button { padding: 10px 20px; background: #111; color: #fff; border: none; border-radius: 8px; cursor: pointer; font-size: 0.95rem; }
+    .paywall-content button:hover { background: #000; }
+    @media (max-width: 800px) { .hero { grid-template-columns: minmax(0, 1fr); } header { flex-direction: column; align-items: flex-start; gap: 10px; } nav a { margin-left: 0; margin-right: 14px; font-size: 0.9rem; } }
   </style>
 </head>
 <body>
 <div class="overlay">
-  <header>
-    <div class="logo">Interior AI</div>
-    <nav>
-      <a href="#how">Как это работает</a>
-      <a href="#for">Для кого</a>
-      <a href="#pricing">Тарифы</a>
-      <a href="#gallery">Примеры</a>
-      <a href="#market">Маркетплейсы</a>
-      <a href="#about">О проекте</a>
-    </nav>
-  </header>
-
+  <header><div class="logo">Interior AI</div><nav><a href="#how">Как это работает</a><a href="#for">Для кого</a><a href="#pricing">Тарифы</a><a href="#gallery">Примеры</a><a href="#market">Маркетплейсы</a><a href="#about">О проекте</a></nav></header>
   <main>
-    <!-- HERO SECTION -->
-    <section class="hero">
-      <div>
-        <h1>The Design of your dreams</h1>
-        <p class="hero-subtitle">Загрузите фото своей комнаты и получите несколько вариантов интерьера в нужном стиле за 1 минуту — вместе с базовым планом расстановки инженерных коммуникаций.</p>
-        <p class="hero-subtitle">Сервис создан для тех, кто хочет быстро протестировать идеи перед ремонтом или продажей квартиры, а также для дизайнеров и риэлторов, которым нужны быстрые визуализации.</p>
-        <div class="hero-badges">
-          <span class="badge">Минимализм и тёплые оттенки</span>
-          <span class="badge">3 бесплатные генерации</span>
-          <span class="badge">Без водяных знаков</span>
-        </div>
-        <button class="primary-btn" onclick="document.getElementById('file-input').click()">Начать с бесплатной генерации</button>
-        <p class="hero-note">Работаем через бесплатные ИИ-сервисы, доступные в РФ.</p>
-      </div>
-      <div class="hero-upload" id="upload">
-        <h3 style="font-size:1rem; margin-bottom:10px;">Загрузка фото комнаты</h3>
-        <div class="upload-zone" onclick="document.getElementById('file-input').click()">
-          <p><strong>Перетащите файл</strong> или нажмите, чтобы выбрать фото квартиры (JPG, PNG, до 10 МБ)</p>
-          <input type="file" id="file-input" accept="image/*" />
-        </div>
-        <div class="preview" id="preview">
-          <p style="font-size:0.8rem; margin-bottom:6px;">Предпросмотр исходного фото:</p>
-          <img id="preview-img" src="" alt="Предпросмотр" />
-        </div>
-        <p style="font-size:0.85rem; color:#666; margin-top:10px;">После загрузки изображение формируется в ИИ-сервисе: создаётся новый дизайн и схема расстановки основных инженерных точек (розетки, освещение, сантехника).</p>
-      </div>
+    <section class="hero"><div><h1>The Design of your dreams</h1><p class="hero-subtitle">Загрузите фото своей комнаты и получите несколько вариантов интерьера в нужном стиле за 1 минуту — вместе с базовым планом расстановки инженерных коммуникаций.</p><p class="hero-subtitle">Сервис создан для тех, кто хочет быстро протестировать идеи перед ремонтом или продажей квартиры, а также для дизайнеров и риэлторов, которым нужны быстрые визуализации.</p><div class="hero-badges"><span class="badge">Минимализм и тёплые оттенки</span><span class="badge">3 бесплатные генерации</span><span class="badge">Без водяных знаков</span></div><button class="primary-btn" onclick="openStyleModal()">Начать с бесплатной генерации</button><p class="hero-note">Выберите стиль, загрузите фото и получите дизайн за минуту.</p></div>
+      <div class="hero-upload" id="upload"><h3 style="font-size:1rem; margin-bottom:10px;">Загрузка фото комнаты</h3><div class="upload-zone" onclick="document.getElementById('file-input').click()"><p><strong>Перетащите файл</strong> или нажмите, чтобы выбрать фото квартиры (JPG, PNG, до 10 МБ)</p><input type="file" id="file-input" accept="image/*" /></div><div class="preview" id="preview"><p style="font-size:0.8rem; margin-bottom:6px;">Предпросмотр исходного фото:</p><img id="preview-img" src="" alt="Предпросмотр" /></div><p style="font-size:0.85rem; color:#666; margin-top:10px;">После загрузки изображение формируется в ИИ-сервисе: создаётся новый дизайн и схема расстановки основных инженерных точек (розетки, освещение, сантехника).</p></div>
     </section>
-    <!-- HOW IT WORKS -->
-    <section class="section" id="how">
-      <h2>Как это работает</h2>
-      <div class="steps">
-        <div class="step">
-          <div class="step-title">1. Загружение сходного файла</div>
-          <p>Отправите фото квартиры или отдельной комнаты, система покажет предпросмотр.</p>
-        </div>
-        <div class="step">
-          <div class="step-title">2. Выбор стиля и параметров</div>
-          <p>Выберите тип помещения, стиль (минимализм, сканди, лофт) и цветовою палитру.</p>
-        </div>
-        <div class="step">
-          <div class="step-title">3. Генерация интерьера</div>
-          <p>Бэкенд обращается к бесплатным ИИ-сервисам для редизайна интерьера.</p>
-        </div>
-        <div class="step">
-          <div class="step-title">4. Выгружка результата</div>
-          <p>Получите готовые картинки и базовый проект расстановки инженерных коммуникаций.</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- FOR WHOM -->
-    <section class="section" id="for">
-      <h2>Для кого и чем полезен</h2>
-      <div class="steps">
-        <div class="step">
-          <div class="step-title">Владельцы квартир</div>
-          <p>Быстро увидеть варианты будущего ремонта и сравнить стили.</p>
-        </div>
-        <div class="step">
-          <div class="step-title">Дизайнеры</div>
-          <p>Ояснить архитектурные решения и скорость чернового варианта.</p>
-        </div>
-        <div class="step">
-          <div class="step-title">Риэлторы</div>
-          <p>Виртуальный стейджинг для повышения аттрактивности объявлений.</p>
-        </div>
-      </div>
-      <h3 style="font-size:1.1rem; margin:24px 0 10px;">Преимущества сервиса</h3>
-      <div class="benefits">
-        <div class="benefit-card">
-          <strong>Скорость</strong>
-          <p>Готовые варианты за 1–2 минуты.</p>
-        </div>
-        <div class="benefit-card">
-          <strong>Стоимость</strong>
-          <p>Бесплатные потому что стоимость тарифа ниже, чем дизайн-проект.</p>
-        </div>
-        <div class="benefit-card">
-          <strong>Эксперименты</strong>
-          <p>Протестируйте разные стили до начала ремонта.</p>
-        </div>
-      </div>
-    </section>
-    <!-- PRICING -->
-    <section class="section" id="pricing">
-      <h2>Тарифы и монетизация</h2>
-      <p>Доступны бесплатный тариф для тестирования сервиса и безлимитный доступ жизнь для активной работы в течение 3 дней.</p>
-      <div class="tariff-grid">
-        <div class="tariff">
-          <div class="tariff-title">Бесплатно</div>
-          <div class="tariff-price">0 ₽ <span class="label">для теста</span></div>
-          <ul>
-            <li>✅ 3 генерации в месяц</li>
-            <li>✅ Разрешение 1024×1024 px</li>
-            <li>✅ Без водяных знаков</li>
-            <li>✅ Базовая схема инженерных точек</li>
-          </ul>
-        </div>
-        <div class="tariff">
-          <div class="tariff-title">Безлимит 3 дня</div>
-          <div class="tariff-price">999 ₽ <span class="label">рекомендуем</span></div>
-          <ul>
-            <li>✅ Неограниченные генерации (в течение 3 дней)</li>
-            <li>✅ Приоритетная очередь</li>
-            <li>✅ Сохранение пресетов стилей и проектов</li>
-            <li>✅ Поддержка по эл. почте</li>
-          </ul>
-        </div>
-      </div>
-    </section>
-
-    <!-- GALLERY -->
-    <section class="section" id="gallery">
-      <h2>Примеры до/после</h2>
-      <p>Ниже — демонстрационные примеры трансформации комнат: слева — исходное фото, справа — пропозенный интерьер.</p>
-      <div class="gallery-grid">
-        <div class="gallery-card">
-          <div class="gallery-images">
-            <img src="https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?w=400" alt="На д" />
-            <img src="https://images.unsplash.com/photo-1565182999555-2142a9dfb519?w=400" alt="На после" />
-          </div>
-          <p><strong>Гостиная:</strong> Небольшая трансформация в уютный минималистичный интерьер.</p>
-        </div>
-        <div class="gallery-card">
-          <div class="gallery-images">
-            <img src="https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=400" alt="Спальня д" />
-            <img src="https://images.unsplash.com/photo-1540932239986-310128078ceb?w=400" alt="Спальня после" />
-          </div>
-          <p><strong>Спальня:</strong> Добавлены текстиль и теплое освещение для уюта.</p>
-        </div>
-        <div class="gallery-card">
-          <div class="gallery-images">
-            <img src="https://images.unsplash.com/photo-1556909012-d5b604d0c90d?w=400" alt="Кухня д" />
-            <img src="https://images.unsplash.com/photo-1556518776-a6f4ad4aa9ad?w=400" alt="Кухня после" />
-          </div>
-          <p><strong>Кухня:</strong> рациональная планировка и светлые тона для визуального расширения.</p>
-        </div>
-      </div>
-    </section>
-    <!-- MARKETPLACES -->
-    <section class="section" id="market">
-      <h2>Подбор товаров на маркетплейсах</h2>
-      <p>На основе выбранного стиля сервис покажет подборки нарда и декора с линками в популярные маркетплейсы.</p>
-      <div class="market-grid">
-        <div class="market-card">
-          <strong>Центры дизайна и мебели</strong>
-          <ul>
-            <li><a href="https://www.wildberries.ru/catalog/dom/mebel" target="_blank" rel="noopener">Мебель на Wildberries</a></li>
-            <li><a href="https://www.ozon.ru/category/mebel" target="_blank" rel="noopener">Мебель на Ozon</a></li>
-          </ul>
-        </div>
-        <div class="market-card">
-          <strong>Текстиль и декор</strong>
-          <ul>
-            <li><a href="https://www.wildberries.ru/catalog/dom-i-dacha" target="_blank" rel="noopener">Дом и дача на Wildberries</a></li>
-            <li><a href="https://www.ozon.ru/category/dom-i-sad" target="_blank" rel="noopener">Дом и сад на Ozon</a></li>
-          </ul>
-        </div>
-        <div class="market-card">
-          <strong>Освещение и лампы</strong>
-          <ul>
-            <li><a href="https://www.wildberries.ru/catalog/tovary/dekor" target="_blank" rel="noopener">Лампы на Wildberries</a></li>
-            <li><a href="https://www.ozon.ru/category/osveshchenie" target="_blank" rel="noopener">Освещение на Ozon</a></li>
-          </ul>
-        </div>
-      </div>
-    </section>
-
-    <!-- ABOUT & CONTACTS -->
-    <section class="section" id="about">
-      <h2>О проекте и контакты</h2>
-      <p><strong>Interior AI</strong> — экспериментальный сервис визуализации интерьеров на базе бесплатных ОБ истем доступных в РФ, созданный для упрощения первых шагов в проектировании ремонта.</p>
-      <p>Проект разработан частным разработчиком, специализирующимся на работе с генеративным ОИ и интерфейсами.</p>
-      <p>По вопросам сотрудничества, баг-репортов и предложений пишите на: <a href="mailto:youremail@example.com">youremail@example.com</a></p>
-    </section>
-  </main>
-
-  <footer>
-    © Interior AI, 2025. Используются внешние ОИ-сервисы и маркетплейсы; итоговые изображения могут отличаться.
-  </footer>
-</div>
-</body>
-</html>
-
-<script>
-  // Простой предпросмотр загруженного изображения
-  const fileInput = document.getElementById('file-input');
-  const preview = document.getElementById('preview');
-  const previewImg = document.getElementById('preview-img');
-
-  if (fileInput) {
-    fileInput.addEventListener('change', function () {
-      const file = this.files[0];
-      if (!file) return;
-      const reader = new FileReader();
-      reader.onload = function (e) {
-        previewImg.src = e.target.result;
-        preview.style.display = 'block';
-      };
-      reader.readAsDataURL(file);
-    });
-  }
-</script>
