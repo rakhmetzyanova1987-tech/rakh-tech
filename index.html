@@ -1,215 +1,147 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>The Design of your Dreams – Interior AI</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
       font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: #f5f5f5 url("1.jpg") center/cover fixed;
       color: #111;
-      background: #f5f5f5 url("1.jpg") center/cover fixed no-repeat;
     }
-    .overlay {
-      background: rgba(255,255,255,0.92);
-      min-height: 100vh;
-    }
-    header {
-      max-width: 1120px;
-      margin: 0 auto;
-      padding: 20px 20px 0;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-    .logo { font-weight: 600; letter-spacing: 0.04em; }
-    nav a {
-      margin-left: 20px;
-      text-decoration: none;
-      color: #333;
-      font-size: 0.95rem;
-    }
+    .overlay { background: rgba(255,255,255,0.92); min-height: 100vh; padding: 20px; }
+    header { max-width: 1120px; margin: 0 auto; padding: 20px 0; display: flex; justify-content: space-between; align-items: center; }
+    .logo { font-weight: 600; font-size: 1.2rem; }
+    nav a { margin-left: 20px; text-decoration: none; color: #333; font-size: 0.95rem; }
     nav a:hover { text-decoration: underline; }
-    .hero {
-      max-width: 1120px;
-      margin: 40px auto 60px;
-      padding: 40px 20px;
-      display: grid;
-      grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
-      gap: 32px;
-      background: #ffffffcc;
-      border-radius: 20px;
-      backdrop-filter: blur(8px);
-    }
-    .hero h1 {
-      font-size: 2.4rem;
-      line-height: 1.1;
-      margin-bottom: 20px;
-    }
-    .hero-subtitle {
-      font-size: 1.05rem;
-      line-height: 1.5;
-      margin-bottom: 16px;
-      color: #444;
-    }
-    .hero-badges {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin: 10px 0 24px;
-    }
-    .badge {
-      font-size: 0.8rem;
-      padding: 4px 10px;
-      border-radius: 999px;
-      border: 1px solid #ddd;
-      background: #fafafa;
-    }
-    .primary-btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      padding: 10px 20px;
-      border-radius: 999px;
-      border: none;
-      cursor: pointer;
-      background: #111;
-      color: #fff;
-      font-size: 0.95rem;
-    }
-    .primary-btn:hover { background: #000; }
-    .hero-note {
-      font-size: 0.8rem;
-      color: #666;
-      margin-top: 10px;
-    }
-    .hero-upload {
-      background: #fff;
-      border-radius: 16px;
-      padding: 20px;
-      border: 1px solid #eee;
-    }
-    .upload-zone {
-      border: 1px dashed #ccc;
-      border-radius: 12px;
-      padding: 20px;
-      text-align: center;
-      cursor: pointer;
-      background: #fafafa;
-      font-size: 0.9rem;
-      color: #555;
-      margin-bottom: 16px;
-    }
+    .container { max-width: 1120px; margin: 0 auto; padding: 40px 20px; }
+    .hero { display: grid; grid-template-columns: 1.4fr 1fr; gap: 32px; margin-bottom: 60px; }
+    h1 { font-size: 2.4rem; line-height: 1.1; margin-bottom: 20px; }
+    .hero-subtitle { font-size: 1rem; line-height: 1.6; margin-bottom: 16px; color: #444; }
+    .badges { display: flex; flex-wrap: wrap; gap: 10px; margin: 20px 0; }
+    .badge { font-size: 0.85rem; padding: 6px 12px; border: 1px solid #ddd; border-radius: 999px; background: #fafafa; }
+    .btn { padding: 12px 24px; border: none; border-radius: 999px; cursor: pointer; font-size: 0.95rem; }
+    .btn-primary { background: #111; color: #fff; }
+    .btn-primary:hover { background: #000; }
+    .btn-secondary { background: #f0f0f0; color: #111; margin: 5px; }
+    .btn-secondary.selected { background: #111; color: #fff; }
+    .upload { background: #fff; border-radius: 12px; padding: 20px; border: 1px solid #eee; }
+    .upload-zone { border: 2px dashed #ccc; border-radius: 12px; padding: 40px; text-align: center; cursor: pointer; background: #fafafa; }
+    .upload-zone:hover { border-color: #111; background: #f0f0f0; }
     .upload-zone input { display: none; }
-    .preview { margin-top: 10px; display: none; }
-    .preview img { max-width: 100%; border-radius: 12px; display: block; }
-    .section { max-width: 1120px; margin: 0 auto 60px; padding: 0 20px; }
-    .section h2 { font-size: 1.6rem; margin-bottom: 16px; }
-    .section p { font-size: 0.95rem; color: #555; margin-bottom: 14px; line-height: 1.5; }
-    .steps, .benefits, .tariff-grid, .gallery-grid, .market-grid { display: grid; gap: 14px; }
-    .steps { grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); }
-    .step, .benefit-card, .tariff, .gallery-card, .market-card { background: #fff; border-radius: 14px; padding: 14px 16px; border: 1px solid #eee; font-size: 0.9rem; }
-    .step-title { font-weight: 600; margin-bottom: 4px; }
-    .tariff-grid { grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
-    .tariff-title { font-weight: 600; margin-bottom: 6px; }
-    .tariff-price { font-size: 1.2rem; margin-bottom: 10px; }
-    .tariff ul { list-style: none; padding-left: 0; }
-    .tariff ul li { margin-bottom: 6px; }
-    .label { display: inline-block; font-size: 0.7rem; padding: 2px 8px; border-radius: 999px; background: #f1f1f1; margin-left: 6px; }
-    .gallery-grid { grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
-    .gallery-images { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; margin-bottom: 8px; }
-    .gallery-images img { width: 100%; border-radius: 10px; display: block; }
-    .market-grid { grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
-    .market-card ul { list-style: none; padding-left: 0; }
-    .market-card li { margin-bottom: 6px; }
-    .market-card a { color: #1a73e8; text-decoration: none; font-size: 0.9rem; }
-    .market-card a:hover { text-decoration: underline; }
-    footer { border-top: 1px solid #e5e5e5; padding: 20px; font-size: 0.85rem; color: #666; max-width: 1120px; margin: 0 auto 30px; }
-    footer a { color: #1a73e8; text-decoration: none; }
-    footer a:hover { text-decoration: underline; }
-    .modal { display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.5); }
-    .modal-content { background-color: #fff; margin: 10% auto; padding: 30px; border-radius: 12px; width: 80%; max-width: 500px; }
-    .modal-title { font-size: 1.5rem; margin-bottom: 16px; font-weight: 600; }
-    .modal-styles { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin-bottom: 20px; }
-    .style-btn { padding: 10px 15px; border: 2px solid #ddd; border-radius: 8px; background: #fff; cursor: pointer; font-size: 0.95rem; transition: all 0.3s; }
-    .style-btn:hover { border-color: #111; }
-    .style-btn.selected { background: #111; color: #fff; border-color: #111; }
+    .preview { margin-top: 15px; text-align: center; }
+    .preview img { max-width: 100%; border-radius: 12px; }
+    .modal { display: none; position: fixed; z-index: 9999; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); }
+    .modal.active { display: flex; align-items: center; justify-content: center; }
+    .modal-content { background: #fff; padding: 40px; border-radius: 16px; max-width: 500px; width: 90%; }
+    .modal-title { font-size: 1.5rem; margin-bottom: 20px; font-weight: 600; }
+    .styles-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-bottom: 20px; }
     .modal-buttons { display: flex; gap: 10px; }
-    .modal-buttons button { flex: 1; padding: 10px; border: none; border-radius: 8px; cursor: pointer; font-size: 0.95rem; }
-    .modal-buttons .cancel { background: #f0f0f0; color: #111; }
-    .modal-buttons .generate { background: #111; color: #fff; }
-    .modal-buttons .cancel:hover { background: #e0e0e0; }
-    .modal-buttons .generate:hover { background: #000; }
-    .paywall-modal { display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.5); }
-    .paywall-content { background-color: #fff; margin: 15% auto; padding: 30px; border-radius: 12px; width: 80%; max-width: 400px; text-align: center; }
-    .paywall-content h2 { margin-bottom: 16px; }
-    .paywall-content p { margin-bottom: 20px; color: #666; }
-    .paywall-content button { padding: 10px 20px; background: #111; color: #fff; border: none; border-radius: 8px; cursor: pointer; font-size: 0.95rem; }
-    .paywall-content button:hover { background: #000; }
-    @media (max-width: 800px) { .hero { grid-template-columns: minmax(0, 1fr); } header { flex-direction: column; align-items: flex-start; gap: 10px; } nav a { margin-left: 0; margin-right: 14px; font-size: 0.9rem; } }
+    .modal-buttons button { flex: 1; padding: 12px; border: none; border-radius: 8px; cursor: pointer; font-size: 0.95rem; }
+    .result { margin-top: 40px; text-align: center; }
+    .result img { max-width: 100%; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.2); }
+    @media (max-width: 800px) { .hero { grid-template-columns: 1fr; } header { flex-direction: column; gap: 10px; } nav a { margin-left: 0; margin-right: 15px; } }
   </style>
 </head>
 <body>
 <div class="overlay">
-  <header><div class="logo">Interior AI</div><nav><a href="#how">Как это работает</a><a href="#for">Для кого</a><a href="#pricing">Тарифы</a><a href="#gallery">Примеры</a><a href="#market">Маркетплейсы</a><a href="#about">О проекте</a></nav></header>
-  <main>
-    <section class="hero"><div><h1>The Design of your dreams</h1><p class="hero-subtitle">Загрузите фото своей комнаты и получите несколько вариантов интерьера в нужном стиле за 1 минуту — вместе с базовым планом расстановки инженерных коммуникаций.</p><p class="hero-subtitle">Сервис создан для тех, кто хочет быстро протестировать идеи перед ремонтом или продажей квартиры, а также для дизайнеров и риэлторов, которым нужны быстрые визуализации.</p><div class="hero-badges"><span class="badge">Минимализм и тёплые оттенки</span><span class="badge">3 бесплатные генерации</span><span class="badge">Без водяных знаков</span></div><button class="primary-btn" onclick="openStyleModal()">Начать с бесплатной генерации</button><p class="hero-note">Выберите стиль, загрузите фото и получите дизайн за минуту.</p></div>
-      <div class="hero-upload" id="upload"><h3 style="font-size:1rem; margin-bottom:10px;">Загрузка фото комнаты</h3><div class="upload-zone" onclick="document.getElementById('file-input').click()"><p><strong>Перетащите файл</strong> или нажмите, чтобы выбрать фото квартиры (JPG, PNG, до 10 МБ)</p><input type="file" id="file-input" accept="image/*" /></div><div class="preview" id="preview"><p style="font-size:0.8rem; margin-bottom:6px;">Предпросмотр исходного фото:</p><img id="preview-img" src="" alt="Предпросмотр" /></div><p style="font-size:0.85rem; color:#666; margin-top:10px;">После загрузки изображение формируется в ИИ-сервисе: создаётся новый дизайн и схема расстановки основных инженерных точек (розетки, освещение, сантехника).</p></div>
-    </section>
+  <header>
+    <div class="logo">Interior AI</div>
+    <nav>
+      <a href="#">Как это работает</a>
+      <a href="#">Для кого</a>
+      <a href="#">Тарифы</a>
+      <a href="#">Примеры</a>
+      <a href="#">О проекте</a>
+    </nav>
+  </header>
 
-      <script>
-            function openStyleModal() {
-                    console.log('openStyleModal called');
-                    console.log('Element:', document.getElementById('styleModal'));
-              document.getElementById('styleModal').style.display = 'block';
-            }
+  <div class="container">
+    <div class="hero">
+      <div>
+        <h1>The Design of your dreams</h1>
+        <p class="hero-subtitle">Загрузите фото своей комнаты и получите несколько вариантов интерьера в нужном стиле за 1 минуту.</p>
+        <div class="badges">
+          <span class="badge">Минимализм</span>
+          <span class="badge">3 бесплатные генерации</span>
+          <span class="badge">Без водяных знаков</span>
+        </div>
+        <button class="btn btn-primary" onclick="openModal()">Начать генерацию</button>
+      </div>
+      <div class="upload">
+        <h3>Загрузка фото</h3>
+        <div class="upload-zone" onclick="document.getElementById('fileInput').click()">
+          <p><strong>Нажмите</strong> или перетащите фото комнаты</p>
+          <input type="file" id="fileInput" accept="image/*">
+        </div>
+        <div class="preview" id="preview"></div>
+      </div>
+    </div>
 
-            document.getElementById('file-input')?.addEventListener('change', function(e) {
-                    const file = e.target.files[0];
-                    if (file) {
-                              const reader = new FileReader();
-                              reader.onload = function(event) {
-                                          document.getElementById('preview-img').src = event.target.result;
-                                          document.getElementById('preview').style.display = 'block';
-                                        };
-                              reader.readAsDataURL(file);
-                            }
-                          });
+    <div class="result" id="result"></div>
+  </div>
+</div>
 
-            function closeModal(modalId) {
-                    document.getElementById(modalId).style.display = 'none';
-                  }
+<div class="modal" id="styleModal">
+  <div class="modal-content">
+    <h2 class="modal-title">Выберите стиль интерьера</h2>
+    <div class="styles-grid">
+      <button class="btn btn-secondary" onclick="selectStyle('Минимализм')">Минимализм</button>
+      <button class="btn btn-secondary" onclick="selectStyle('Модерн')">Модерн</button>
+      <button class="btn btn-secondary" onclick="selectStyle('Классика')">Классика</button>
+      <button class="btn btn-secondary" onclick="selectStyle('Лофт')">Лофт</button>
+    </div>
+    <div class="modal-buttons">
+      <button class="btn btn-secondary" onclick="closeModal()">Отмена</button>
+      <button class="btn btn-primary" onclick="generateDesign()">Генерировать</button>
+    </div>
+  </div>
+</div>
 
-            function selectStyle(styleName) {
-                    document.querySelectorAll('.style-btn').forEach(btn => {
-                              btn.classList.remove('selected');
-                            });
-                    event.target.classList.add('selected');
-                    localStorage.setItem('selectedStyle', styleName);
-                  }
+<script>
+let selectedStyle = '';
+let uploadedImage = '';
 
-            function generateDesign() {
-                    alert('Генерация началась! Проверьте консоль браузера.');
-                    closeModal('styleModal');
-                  }
-          </script>
+function openModal() {
+  document.getElementById('styleModal').classList.add('active');
+}
 
-        <div id="styleModal" class="modal">
-                <div class="modal-content">
-                          <h2 class="modal-title">Выберите стиль интерьера</h2>
-                          <div class="modal-styles">
-                                      <button class="style-btn" onclick="selectStyle('minimalism')">Minimalism</button>
-                                      <button class="style-btn" onclick="selectStyle('luxury')">Luxury</button>
-                                      <button class="style-btn" onclick="selectStyle('modern')">Modern</button>
-                                      <button class="style-btn" onclick="selectStyle('classic')">Classic</button>
-                                    </div>
-                          <div class="modal-buttons">
-                                      <button class="cancel" onclick="closeModal('styleModal')">Отмена</button>
-                                      <button class="generate" onclick="generateDesign()">Генерировать</button>
-                                    </div>
-                        </div>
-              </div>
-      </body>
-    </html>
-    </html>
+function closeModal() {
+  document.getElementById('styleModal').classList.remove('active');
+}
+
+function selectStyle(style) {
+  selectedStyle = style;
+  document.querySelectorAll('.styles-grid button').forEach(btn => btn.classList.remove('selected'));
+  event.target.classList.add('selected');
+}
+
+function generateDesign() {
+  if(!uploadedImage) {
+    alert('Пожалуйста, загрузите фото комнаты!');
+    return;
+  }
+  if(!selectedStyle) {
+    alert('Пожалуйста, выберите стиль!');
+    return;
+  }
+  closeModal();
+  document.getElementById('result').innerHTML = '<p>🎨 Генерация дизайна в стиле "' + selectedStyle + '"...</p><p style="margin-top: 20px; font-size: 0.9rem; color: #666;">Это демо версия. Для полной функциональности нужно подключить AI API.</p>';
+}
+
+document.getElementById('fileInput').addEventListener('change', function(e) {
+  const file = e.target.files[0];
+  if(file) {
+    const reader = new FileReader();
+    reader.onload = function(event) {
+      uploadedImage = event.target.result;
+      document.getElementById('preview').innerHTML = '<img src="' + uploadedImage + '" alt="Загруженное фото">';
+    };
+    reader.readAsDataURL(file);
+  }
+});
+</script>
+</body>
+</html>
